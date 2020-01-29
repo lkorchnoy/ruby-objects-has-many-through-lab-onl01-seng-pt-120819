@@ -17,16 +17,17 @@ def self.all
 end
 
 def new_appointment(doctor, date)
-  appointment.patient = new_appointment
+  Appointment.new(doctor, self, date)
 end
 
 def appointments
-  Appointment.all.select {|appointment| appointment.patient}
+  Appointment.all.select {|appointment| appointment.patient == self}
   
 end
 
-def doctors(appointments)
-  appointments.map {|appointment| appointment.doctor}
+def doctors
+  appointments.map(&:doctor)
+  # appointments.map {|appointment| appointment.doctor}
 end
   
   
